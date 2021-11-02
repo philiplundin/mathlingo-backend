@@ -5,7 +5,7 @@ const AppDao = require('../database/database');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const dao = new AppDao('C:/Users/dator/WebstormProjects/mathlingo/auth/database/user.db')
+const dao = new AppDao('C:/Users/dator/WebstormProjects/mathlingo/auth/database/user.db');
 const userRepo = new UserRepository(dao)
 
 async function getUserByEmail(email) {
@@ -20,6 +20,24 @@ async function checkPassword(email, password) {
     }
     else {
         return (bcrypt.compareSync(password, hash));
+    }
+}
+
+async function newAccessToken(token) {
+    try {
+        let user = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET)
+        let dbToken = await userRepo.getToken(user.id);
+        
+        if (token == dbToken) {
+            const accessToken = generateAccessToken({ id: user.id, name: user.name, email: user.email})
+            return accessToken;
+        }
+        else {
+            return null;
+        }
+    } catch (TokenExpiredError){
+        console.log("Invalid Token!")
+        return null;
     }
 }
 
@@ -38,9 +56,11 @@ async function addUser(name, email, password) {
 
 async function login(email, password) {
     if (await checkPassword(email, password)) {
-        user = await getUserByEmail(email);
-        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-        return accessToken;
+        const user = await getUserByEmail(email);
+        const accessToken = generateAccessToken(user);
+        const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+        await userRepo.updateRefreshToken(user.id, refreshToken);
+        return [accessToken, refreshToken];
     }
     else {
         return null;
@@ -48,7 +68,22 @@ async function login(email, password) {
 }
 
 function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '5m' })
-  }
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m' })
+}
 
-module.exports = {getUserByEmail, addUser, login}
+async function logout(accessToken) {
+    try {
+        let user = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+        if (!user) {
+            console.log("Invalid Token!")
+            return null;
+        }
+        await userRepo.updateRefreshToken(user.id, null);
+        return user;
+    } catch (TokenExpiredError){
+        console.log("Invalid Token!")
+        return null;
+    }
+}
+
+module.exports = {getUserByEmail, addUser, login, newAccessToken, logout}

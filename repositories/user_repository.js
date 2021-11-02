@@ -4,8 +4,8 @@ class UserRepository {
     }
 
     createTable() {
-        const sql = `CREATE TABLE user (id INTEGER PRIMARY KEY, name TEXT, password TEXT, email TEXT)`
-        return this.dao.run(`CREATE TABLE user (id INTEGER PRIMARY KEY, name TEXT, password TEXT, email TEXT)`);
+        const sql = `CREATE TABLE user (id INTEGER PRIMARY KEY, name TEXT, password TEXT, email TEXT, token TEXT)`
+        return this.dao.run(sql);
     }
 
     async create(name, password, email) {
@@ -23,6 +23,13 @@ class UserRepository {
       return user;
     }
 
+    async getToken(id) {
+      let token = await this.dao.get(
+        `SELECT token FROM user WHERE id = ?`,
+        [id]);
+        return token.token;
+    }
+
     async search(email) {
       let user = await this.dao.get(
         `SELECT id, name, email FROM user WHERE email = ?`,
@@ -38,7 +45,17 @@ class UserRepository {
           return user.password;
         }
         else return null;
-      
+    }
+
+    async updateRefreshToken(id, token) {
+      await this.dao.run(`UPDATE user SET token = ? WHERE id = ?`, [token, id]);
+    }
+
+    async matchTokenHash(hashedToken) {
+      let token = await this.dao.get(
+        `SELECT token FROM user WHERE token = ?`,
+        [hashedToken]);
+        return token;
     }
 }
 

@@ -10,7 +10,7 @@ class AppDao {
             }
             else {
                 console.log('Connected to database');
-                this.db.run(`CREATE TABLE user (id INTEGER PRIMARY KEY, name TEXT, password TEXT, email TEXT)`, (err) => {
+                this.db.run(`CREATE TABLE user (id INTEGER PRIMARY KEY, name TEXT, password TEXT, email TEXT, token TEXT)`, (err) => {
                     if (err) {
                         // Table already created
                         console.log('Schema Exists');
