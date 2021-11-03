@@ -23,6 +23,7 @@ class UserRepository {
       return user;
     }
 
+
     async getToken(id) {
       let token = await this.dao.get(
         `SELECT token FROM user WHERE id = ?`,

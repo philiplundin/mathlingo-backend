@@ -2,6 +2,7 @@ const express = require('express');
 const { JsonWebTokenError } = require('jsonwebtoken');
 const db = require("../../database/database.js");
 const UserService = require('../../services/user_service');
+const QuizService = require('../../services/quiz_service');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
@@ -41,7 +42,13 @@ router.post("/logout", async (req, res, next) => {
             res.send('Signed out ' + user.name);
         }
     }
-})
+});
+
+router.get('/quiz', async (req, res, next) => {
+    console.log("GET request called");
+    let quiz = await QuizService.get(1);
+    res.send(quiz);
+});
 
 
 router.post("/signup", async (req, res, next) => {
