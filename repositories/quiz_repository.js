@@ -12,7 +12,7 @@ class QuizRepository {
 
     async get(id) {
         let quiz = await this.daoQuiz.get(
-            `SELECT id, category, type, difficulty, question, correct_answer, incorrect_answers FROM quiz WHERE id = ?`,
+            `SELECT id, category, difficulty, question, correct_answer FROM quiz WHERE id = ?`,
             [id]);
         console.log(quiz)
         return quiz;
