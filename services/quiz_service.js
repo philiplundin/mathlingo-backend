@@ -10,4 +10,8 @@ async function get(id) {
     return quiz;
 }
 
-module.exports = {get}
+async function getAll(){
+    return quizRepo.getAll();
+}
+
+module.exports = {get, getAll}

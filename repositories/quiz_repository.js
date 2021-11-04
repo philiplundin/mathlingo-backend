@@ -4,17 +4,23 @@ class QuizRepository {
     }
 
 
-    createTable() {
-        const sql = `CREATE TABLE quiz (id INTEGER PRIMARY KEY, question TEXT, answer TEXT)`
-        return this.daoQuiz.run(sql);
-    }
+    // createTable() {
+    //     const sql = `CREATE TABLE quiz (id INTEGER PRIMARY KEY, category TEXT, type TEXT, difficulty TEXT, question TEXT, correct_answer TEXT, incorrect_answers TEXT)`
+    //     return this.daoQuiz.run(sql);
+    // }
 
 
     async get(id) {
         let quiz = await this.daoQuiz.get(
-            `SELECT id, question, answer FROM quiz WHERE id = ?`,
+            `SELECT id, category, type, difficulty, question, correct_answer, incorrect_answers FROM quiz WHERE id = ?`,
             [id]);
+        console.log(quiz)
         return quiz;
     }
+
+    getAll(){
+        return this.daoQuiz.all('select * from quiz')
+    }
+
 }
 module.exports = QuizRepository;

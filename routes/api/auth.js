@@ -45,8 +45,16 @@ router.post("/logout", async (req, res, next) => {
 });
 
 router.get('/quiz', async (req, res, next) => {
+    let quiz = await QuizService.getAll();
+    res.json({
+        "message":"success",
+        "results":quiz
+    });
+});
+
+router.get('/quiz/:id', async (req, res, next) => {
     console.log("GET request called");
-    let quiz = await QuizService.get(1);
+    let quiz = await QuizService.get(req.params.id);
     res.send(quiz);
 });
 

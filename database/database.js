@@ -10,16 +10,17 @@ class AppDao {
             }
             else {
                 console.log('Connected to database');
-                this.db.run(`CREATE TABLE quiz (id INTEGER PRIMARY KEY, question TEXT, answer TEXT)`, (err) => {
+                this.db.run(`CREATE TABLE quiz (id INTEGER PRIMARY KEY, category TEXT, type TEXT, difficulty TEXT, question TEXT, correct_answer TEXT, incorrect_answers TEXT)`, (err) => {
                     if (err) {
                         // Table already created
                         console.log('Schema Exists');
                     } else {
                         console.log('New Schema');
-                        let insert = 'INSERT INTO quiz (question, answer) VALUES (?,?)'
-                        this.db.run(insert, ["1+1","2"])
-                        this.db.run(insert, ["2+2", "4"])
-                        this.db.run(insert, ["3+3", "6"])
+                        let insert = 'INSERT INTO quiz (category, type, difficulty, question, correct_answer, incorrect_answers) VALUES (?,?,?,?,?,?)'
+                        this.db.run(insert, ["General Knowledge","multiple", "medium", "1 + 1", "2","0"])
+                        this.db.run(insert, ["General Knowledge","multiple", "medium", "2 + 2", "4","0"])
+                        this.db.run(insert, ["General Knowledge","multiple", "medium", "3 + 3", "6","0"])
+
                     }
                 }),
                 this.db.run(`CREATE TABLE user (id INTEGER PRIMARY KEY, name TEXT, password TEXT, email TEXT, token TEXT)`, (err) => {
