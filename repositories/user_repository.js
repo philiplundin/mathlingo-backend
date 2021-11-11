@@ -52,6 +52,7 @@ class UserRepository {
       await this.dao.run(`UPDATE user SET token = ? WHERE id = ?`, [token, id]);
     }
 
+
     async matchTokenHash(hashedToken) {
       let token = await this.dao.get(
         `SELECT token FROM user WHERE token = ?`,

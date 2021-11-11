@@ -4,6 +4,7 @@ const UserRepository = require('../repositories/user_repository');
 const AppDao = require('../database/database');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Console = require("console");
 
 const dao = new AppDao('C:/Users/farru/WebstormProjects/mathlingo-backend-auth/database/user.db');
 const userRepo = new UserRepository(dao)
@@ -25,7 +26,7 @@ async function checkPassword(email, password) {
 
 async function newAccessToken(token) {
     try {
-        let user = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET)
+        let user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
         let dbToken = await userRepo.getToken(user.id);
         
         if (token == dbToken) {
@@ -68,11 +69,12 @@ async function login(email, password) {
 }
 
 function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m' })
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '60m' });
 }
 
 async function logout(accessToken) {
     try {
+
         let user = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
         if (!user) {
             console.log("Invalid Token!")

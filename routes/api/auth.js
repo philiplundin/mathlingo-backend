@@ -6,6 +6,7 @@ const QuizService = require('../../services/quiz_service');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
+
 router.post("/login", async (req, res, next) => {
     let errors = [];
     if (!req.body.email) {
@@ -24,17 +25,17 @@ router.post("/login", async (req, res, next) => {
         }
         let accessToken = tokens[0];
         let refreshToken = tokens[1];
-
         res.send({accessToken, refreshToken});
     }
 });
 
 router.post("/logout", async (req, res, next) => {
-    if (!req.body.token) {
+    if (!req.body.accessToken) {
         res.status(400).json("Invalid Token");
     }
     else {
-        let user = await UserService.logout(req.body.token);
+        let user = await UserService.logout(req.body.accessToken);
+
         if (!user) {
             res.status(401).send('Failed to Sign Out');
         }
@@ -82,19 +83,19 @@ router.post("/signup", async (req, res, next) => {
     }
 });
 
-router.post("/token", async (req, res) => {
-    if (req.body.token == null) {
-        res.status(401);
-    }
-    const refreshToken = req.body.token;
-    const newAccessToken = await UserService.newAccessToken(refreshToken);
-    if (!newAccessToken) {
-        res.status(401).send("Unable to obtain access token")
-    }
-    else {
-        res.send(newAccessToken);
-    }
-    
-})
+// router.post("/token", async (req, res) => {
+//     if (req.body.token == null) {
+//         res.status(401);
+//     }
+//     const refreshToken = req.body.token;
+//     const newAccessToken = await UserService.newAccessToken(refreshToken);
+//     if (!newAccessToken) {
+//         res.status(401).send("Unable to obtain access token")
+//     }
+//     else {
+//         res.send(newAccessToken);
+//     }
+//
+// })
 
 module.exports = router;
