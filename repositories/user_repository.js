@@ -15,6 +15,13 @@ class UserRepository {
           [name, password, email]);
         return newUser.id;
     }
+
+    async delete(user) {
+    await this.dao.run(
+            `DELETE FROM user WHERE id = ?`,
+            [user.id]);
+    console.log("The User has been deleted" + user);
+    }
     
     async get(id) {
       let user = await this.dao.get(

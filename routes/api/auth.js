@@ -28,6 +28,15 @@ router.post("/login", async (req, res, next) => {
         res.send({accessToken, refreshToken});
     }
 });
+router.post("/removeAccount", async (req, res, next) => {
+
+        let tokens = await UserService.deleteUser(req.body.accessToken, req.body.refreshToken);
+        if (!req.body.accessToken) {
+            res.status(403).send("Wrong Email or Password")
+        }
+        res.status(204)
+});
+
 
 router.post("/logout", async (req, res, next) => {
     if (!req.body.accessToken) {
