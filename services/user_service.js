@@ -54,6 +54,21 @@ async function addUser(name, email, password) {
     else return null;
 }
 
+async function deleteUser(accessToken) {
+    try {
+        let user = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+        if (!user) {
+            console.log("Invalid Token!")
+            return null;
+        }
+        await userRepo.delete(user);
+        return user;
+    } catch (TokenExpiredError){
+        console.log("Invalid Token!")
+        return null;
+    }
+}
+
 
 async function login(email, password) {
     if (await checkPassword(email, password)) {
@@ -88,4 +103,4 @@ async function logout(accessToken) {
     }
 }
 
-module.exports = {getUserByEmail, addUser, login, newAccessToken, logout}
+module.exports = {getUserByEmail, addUser, login, newAccessToken, logout, deleteUser}
