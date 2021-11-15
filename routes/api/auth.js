@@ -28,15 +28,6 @@ router.post("/login", async (req, res, next) => {
         res.send({accessToken, refreshToken});
     }
 });
-router.post("/removeAccount", async (req, res, next) => {
-
-        let tokens = await UserService.deleteUser(req.body.accessToken, req.body.refreshToken);
-        if (!req.body.accessToken) {
-            res.status(403).send("Wrong Email or Password")
-        }
-        res.status(204)
-});
-
 
 router.post("/logout", async (req, res, next) => {
     if (!req.body.accessToken) {
@@ -54,18 +45,12 @@ router.post("/logout", async (req, res, next) => {
     }
 });
 
-router.get('/quiz', async (req, res, next) => {
-    let quiz = await QuizService.getAll();
-    res.json({
-        "message":"success",
-        "results":quiz
-    });
-});
-
-router.get('/quiz/:id', async (req, res, next) => {
-    console.log("GET request called");
-    let quiz = await QuizService.get(req.params.id);
-    res.send(quiz);
+router.delete("/removeAccount", async (req, res, next) => {
+    let tokens = await UserService.deleteUser(req.body.accessToken, req.body.refreshToken);
+    if (!req.body.accessToken) {
+        res.status(403).send("Wrong Email or Password")
+    }
+    res.status(204)
 });
 
 
@@ -90,6 +75,20 @@ router.post("/signup", async (req, res, next) => {
             res.status(403).send("Email already registered")
         }
     }
+});
+
+router.get('/quiz', async (req, res, next) => {
+    let quiz = await QuizService.getAll();
+    res.json({
+        "message":"success",
+        "results":quiz
+    });
+});
+
+router.get('/quiz/:id', async (req, res, next) => {
+    console.log("GET request called");
+    let quiz = await QuizService.get(req.params.id);
+    res.send(quiz);
 });
 
 // router.post("/token", async (req, res) => {
