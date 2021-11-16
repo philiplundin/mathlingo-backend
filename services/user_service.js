@@ -56,14 +56,15 @@ async function addUser(name, email, password) {
     else return null;
 }
 
-async function updateUser(accessToken, refreshToken) {
+async function updateUser(accessToken, refreshToken, newPassword) {
     try {
         let user = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
         if (!user) {
             console.log("Invalid Token!")
             return null;
         }
-        await userRepo.update(user);
+        let hash = await bcrypt.hash(newPassword, 11);
+        await userRepo.update(user, hash);
         return user;
     } catch (TokenExpiredError){
         console.log("Invalid Token!")

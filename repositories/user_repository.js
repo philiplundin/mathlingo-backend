@@ -24,11 +24,9 @@ class UserRepository {
     }
 
 
-    async update(user) {
-        await this.dao.run();
-            // `UPDATE user
-            // SET password = ?
-            //  WHERE id = user.id´;
+    async update(user, hash) {
+        await this.dao.run(`UPDATE user SET password = ? WHERE id = ?`,
+            [hash,user.id]);
         console.log("The User has been Updated" + user);
 
     }

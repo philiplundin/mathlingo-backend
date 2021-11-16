@@ -45,7 +45,7 @@ router.post("/logout", async (req, res, next) => {
     }
 });
 
-router.delete("/removeAccount", async (req, res, next) => {
+router.post("/removeAccount", async (req, res, next) => {
     let tokens = await UserService.deleteUser(req.body.accessToken, req.body.refreshToken);
     if (!req.body.accessToken) {
         res.status(403).send("Wrong Email or Password")
@@ -54,7 +54,7 @@ router.delete("/removeAccount", async (req, res, next) => {
 });
 
 router.put("/updateUser", async (req, res, next) => {
-    let tokens = await UserService.updateUser(req.body.accessToken, req.body.refreshToken);
+    let tokens = await UserService.updateUser(req.body.accessToken, req.body.refreshToken, req.body.newPassword)
     if (!req.body.accessToken) {
         res.status(403).send("Wrong Email or Password")
     }
