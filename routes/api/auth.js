@@ -53,6 +53,14 @@ router.delete("/removeAccount", async (req, res, next) => {
     res.status(204)
 });
 
+router.put("/updateUser", async (req, res, next) => {
+    let tokens = await UserService.updateUser(req.body.accessToken, req.body.refreshToken);
+    if (!req.body.accessToken) {
+        res.status(403).send("Wrong Email or Password")
+    }
+    res.status(204)
+});
+
 
 router.post("/signup", async (req, res, next) => {
     let errors=[];

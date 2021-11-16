@@ -1,3 +1,5 @@
+
+
 require('dotenv').config();
 const Promise = require('bluebird');
 const UserRepository = require('../repositories/user_repository');
@@ -54,6 +56,22 @@ async function addUser(name, email, password) {
     else return null;
 }
 
+async function updateUser(accessToken, refreshToken) {
+    try {
+        let user = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+        if (!user) {
+            console.log("Invalid Token!")
+            return null;
+        }
+        await userRepo.update(user);
+        return user;
+    } catch (TokenExpiredError){
+        console.log("Invalid Token!")
+        return null;
+    }
+
+}
+
 async function deleteUser(accessToken) {
     try {
         let user = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
@@ -103,4 +121,4 @@ async function logout(accessToken) {
     }
 }
 
-module.exports = {getUserByEmail, addUser, login, newAccessToken, logout, deleteUser}
+module.exports = {getUserByEmail, addUser, login, newAccessToken, logout, deleteUser, updateUser}

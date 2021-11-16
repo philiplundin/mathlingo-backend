@@ -22,6 +22,16 @@ class UserRepository {
             [user.id]);
     console.log("The User has been deleted" + user);
     }
+
+
+    async update(user) {
+        await this.dao.run();
+            // `UPDATE user
+            // SET password = ?
+            //  WHERE id = user.id´;
+        console.log("The User has been Updated" + user);
+
+    }
     
     async get(id) {
       let user = await this.dao.get(
@@ -66,6 +76,7 @@ class UserRepository {
         [hashedToken]);
         return token;
     }
+
 }
 
 module.exports = UserRepository;
