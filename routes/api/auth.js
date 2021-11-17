@@ -6,7 +6,6 @@ const QuizService = require('../../services/quiz_service');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
-
 router.post("/login", async (req, res, next) => {
     let errors = [];
     if (!req.body.email) {
@@ -92,10 +91,59 @@ router.get('/quiz', async (req, res, next) => {
     });
 });
 
+
+
 router.get('/quiz/:id', async (req, res, next) => {
     console.log("GET request called");
     let quiz = await QuizService.get(req.params.id);
     res.send(quiz);
+});
+
+router.get('/results_easy/:id', async (req, res, next) => {
+    console.log("GET results_easy request called");
+    let results_easy = await QuizService.getResultsEasy(req.params.id);
+    res.send(results_easy);
+});
+
+router.get('/results_easy', async (req, res, next) => {
+    let results_easy = await QuizService.getAllResultsEasy();
+    res.json({
+        results_easy
+    });
+});
+
+router.get('/results_hard/:id', async (req, res, next) => {
+    console.log("GET results_hard request called");
+    let results_hard = await QuizService.getResultsHard(req.params.id);
+    res.send(results_hard);
+});
+
+router.get('/results_hard', async (req, res, next) => {
+    let results_hard = await QuizService.getAllResultsHard();
+    res.json({
+        results_hard
+    });
+});
+
+router.get('/results_final/:id', async (req, res, next) => {
+    console.log("GET results_final request called");
+    let results_final = await QuizService.getResultsFinal(req.params.id);
+    res.send(results_final);
+});
+
+router.get('/results_final', async (req, res, next) => {
+    let results_final = await QuizService.getAllResultsFinal();
+    res.json({
+        results_final
+    });
+});
+
+router.post("/results_easy", async (req, res, next) => {
+    await QuizService.createResultsEasy(req.body.data);
+    if (!req.body.data) {
+        res.status(403).send("Wrong Email or Password")
+    }
+    res.status(204)
 });
 
 // router.post("/token", async (req, res) => {

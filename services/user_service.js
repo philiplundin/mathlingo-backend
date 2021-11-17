@@ -6,11 +6,12 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Console = require("console");
 
-const dao = new AppDao('C:/Users/farru/WebstormProjects/mathlingo-backend-auth/database/user.db');
+const dao = new AppDao(process.env.DB_URL)
 const userRepo = new UserRepository(dao)
 
 async function getUserByEmail(email) {
     let user = await userRepo.search(email);
+    console.log(user)
     return user;
 }
 

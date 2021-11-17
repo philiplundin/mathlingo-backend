@@ -10,7 +10,7 @@ class UserRepository {
 
     async create(name, password, email) {
         let newUser = await this.dao.run(
-          `INSERT INTO user (name, password, email)
+          `INSERT INTO user(name, password, email)
             VALUES (?, ?, ?)`,
           [name, password, email]);
         return newUser.id;

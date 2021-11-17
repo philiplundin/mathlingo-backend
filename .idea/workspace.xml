@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86735445-6196-419a-bf25-c50d27eb0d55" name="Changes" comment="Logout! fungerar...">
-      <changelist_data name="PL" email="philip.lundin@iths.se" />
+    <list default="true" id="86735445-6196-419a-bf25-c50d27eb0d55" name="Changes" comment="Quiz file updated!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/user.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repositories/quiz_repository.js" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/quiz_repository.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repositories/user_repository.js" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/user_repository.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/quiz_service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/quiz_service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/user_service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/user_service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +26,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="PL &lt;philip.lundin@iths.se&gt;" />
+      </list>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="philip" />
@@ -145,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637009425673</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Quiz file updated!">
+      <created>1637158404597</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1637158404597</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,6 +184,7 @@
     <MESSAGE value="added remove Account!" />
     <MESSAGE value="Merge remote-tracking branch 'origin/Quiz' into Quiz&#10;&#10;# Conflicts:&#10;#&#9;repositories/user_repository.js" />
     <MESSAGE value="Added swagger documentation." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added swagger documentation." />
+    <MESSAGE value="Quiz file updated!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Quiz file updated!" />
   </component>
 </project>
