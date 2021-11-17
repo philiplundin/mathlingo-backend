@@ -1,5 +1,3 @@
-
-
 require('dotenv').config();
 const Promise = require('bluebird');
 const UserRepository = require('../repositories/user_repository');
@@ -17,6 +15,7 @@ async function getUserByEmail(email) {
 }
 
 async function checkPassword(email, password) {
+
     let hash = await userRepo.getPasswordHashByEmail(email);
     if (!hash) {
         return false;
@@ -90,8 +89,11 @@ async function deleteUser(accessToken) {
 
 
 async function login(email, password) {
+
     if (await checkPassword(email, password)) {
+        console.log(email)
         const user = await getUserByEmail(email);
+
         const accessToken = generateAccessToken(user);
         const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
         await userRepo.updateRefreshToken(user.id, refreshToken);
