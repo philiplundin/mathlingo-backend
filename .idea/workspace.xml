@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b3519a1-32d3-4945-a38d-3995c21238ce" name="Changes" comment="added quiz-questions">
+    <list default="true" id="86735445-6196-419a-bf25-c50d27eb0d55" name="Changes" comment="Logout! fungerar...">
       <changelist_data name="PL" email="philip.lundin@iths.se" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/user.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/user.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/user.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/user_service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/user_service.js" afterDir="false" />
     </list>

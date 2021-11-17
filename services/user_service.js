@@ -91,7 +91,6 @@ async function deleteUser(accessToken) {
 async function login(email, password) {
 
     if (await checkPassword(email, password)) {
-        console.log(email)
         const user = await getUserByEmail(email);
 
         const accessToken = generateAccessToken(user);
