@@ -1,11 +1,14 @@
+
+
 require('dotenv').config();
 const Promise = require('bluebird');
 const UserRepository = require('../repositories/user_repository');
 const AppDao = require('../database/database');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Console = require("console");
 
-const dao = new AppDao('C:/Users/dator/WebstormProjects/mathlingo/auth/database/user.db');
+const dao = new AppDao('C:/Users/farru/WebstormProjects/mathlingo-backend-auth/database/user.db');
 const userRepo = new UserRepository(dao)
 
 async function getUserByEmail(email) {
@@ -25,7 +28,7 @@ async function checkPassword(email, password) {
 
 async function newAccessToken(token) {
     try {
-        let user = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET)
+        let user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
         let dbToken = await userRepo.getToken(user.id);
         
         if (token == dbToken) {
@@ -53,6 +56,38 @@ async function addUser(name, email, password) {
     else return null;
 }
 
+async function updateUser(accessToken, refreshToken, newPassword) {
+    try {
+        let user = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+        if (!user) {
+            console.log("Invalid Token!")
+            return null;
+        }
+        let hash = await bcrypt.hash(newPassword, 11);
+        await userRepo.update(user, hash);
+        return user;
+    } catch (TokenExpiredError){
+        console.log("Invalid Token!")
+        return null;
+    }
+
+}
+
+async function deleteUser(accessToken) {
+    try {
+        let user = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+        if (!user) {
+            console.log("Invalid Token!")
+            return null;
+        }
+        await userRepo.delete(user);
+        return user;
+    } catch (TokenExpiredError){
+        console.log("Invalid Token!")
+        return null;
+    }
+}
+
 
 async function login(email, password) {
     if (await checkPassword(email, password)) {
@@ -68,11 +103,12 @@ async function login(email, password) {
 }
 
 function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m' })
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '60m' });
 }
 
 async function logout(accessToken) {
     try {
+
         let user = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
         if (!user) {
             console.log("Invalid Token!")
@@ -86,4 +122,4 @@ async function logout(accessToken) {
     }
 }
 
-module.exports = {getUserByEmail, addUser, login, newAccessToken, logout}
+module.exports = {getUserByEmail, addUser, login, newAccessToken, logout, deleteUser, updateUser}

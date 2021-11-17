@@ -15,6 +15,21 @@ class UserRepository {
           [name, password, email]);
         return newUser.id;
     }
+
+    async delete(user) {
+    await this.dao.run(
+            `DELETE FROM user WHERE id = ?`,
+            [user.id]);
+    console.log("The User has been deleted" + user);
+    }
+
+
+    async update(user, hash) {
+        await this.dao.run(`UPDATE user SET password = ? WHERE id = ?`,
+            [hash,user.id]);
+        console.log("The User has been Updated" + user);
+
+    }
     
     async get(id) {
       let user = await this.dao.get(
@@ -22,6 +37,7 @@ class UserRepository {
         [id]);
       return user;
     }
+
 
     async getToken(id) {
       let token = await this.dao.get(
@@ -51,12 +67,14 @@ class UserRepository {
       await this.dao.run(`UPDATE user SET token = ? WHERE id = ?`, [token, id]);
     }
 
+
     async matchTokenHash(hashedToken) {
       let token = await this.dao.get(
         `SELECT token FROM user WHERE token = ?`,
         [hashedToken]);
         return token;
     }
+
 }
 
 module.exports = UserRepository;
