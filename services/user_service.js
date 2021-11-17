@@ -1,5 +1,3 @@
-
-
 require('dotenv').config();
 const Promise = require('bluebird');
 const UserRepository = require('../repositories/user_repository');
@@ -8,7 +6,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Console = require("console");
 
-const dao = new AppDao('C:/Users/farru/WebstormProjects/mathlingo-backend-auth/database/user.db');
+const dao = new AppDao(process.env.DB_URL);
 const userRepo = new UserRepository(dao)
 
 async function getUserByEmail(email) {
