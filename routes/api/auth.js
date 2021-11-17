@@ -88,8 +88,7 @@ router.post("/signup", async (req, res, next) => {
 router.get('/quiz', async (req, res, next) => {
     let quiz = await QuizService.getAll();
     res.json({
-        "message":"success",
-        "results":quiz
+        quiz
     });
 });
 
