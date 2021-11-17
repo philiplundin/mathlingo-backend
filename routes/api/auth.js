@@ -54,7 +54,7 @@ router.post("/removeAccount", async (req, res, next) => {
 });
 
 router.put("/updateUser", async (req, res, next) => {
-    let tokens = await UserService.updateUser(req.body.accessToken, req.body.refreshToken, req.body.newPassword)
+    let tokens = await UserService.updateUser(req.body.accessToken, req.body.refreshToken, 'r')
     if (!req.body.accessToken) {
         res.status(403).send("Wrong Email or Password")
     }
@@ -88,7 +88,8 @@ router.post("/signup", async (req, res, next) => {
 router.get('/quiz', async (req, res, next) => {
     let quiz = await QuizService.getAll();
     res.json({
-        quiz
+        "message":"success",
+        "results":quiz
     });
 });
 
