@@ -10,6 +10,12 @@ class QuizRepository {
         console.log(quiz)
         return quiz;
     }
+    async getUserId(user_id) {
+        let results_easy = await this.dao.get(
+            `SELECT * FROM results_easy WHERE user_id = ?`,
+            [user_id]);
+        return results_easy;
+    }
 
     async getAll(){
         return this.daoQuiz.all('select * from quiz')
@@ -22,7 +28,7 @@ class QuizRepository {
 
     async getResultEasy(id) {
         let results_easy = await this.daoQuiz.get(
-            `SELECT * FROM results_easy WHERE id = ?`,
+            `SELECT * FROM results_easy WHERE user_id = ?`,
             [id]);
         return results_easy;
     }
@@ -49,18 +55,24 @@ class QuizRepository {
         return results_final;
     }
 
-    async createResultsEasy(data) {
+    async createResultsEasy(data, user) {
         let results_easy = await this.daoQuiz.run(
             `INSERT INTO results_easy(addition, subtraction, multiplication, division, user_id)
             VALUES (?, ?, ?, ?, ?)`,
-            [data.addition, data.subtraction,data.multiplication, data.division, data.user]);
+            [data.addition, data.subtraction,data.multiplication, data.division, user.id]);
         return results_easy.id;
     }
 
-    // async updateResultEasy(user, results_easy) {
-    //     await this.dao.run(`UPDATE results_easy SET password = ? WHERE id = ?`,
-    //         [hash,user.id]);
-    //     console.log("The results for easy has been Updated" + user);
-    // }
+   async updateResultsEasy(data, user) {
+        console.log(data);
+        console.log(user);
+        await this.daoQuiz.run(`UPDATE results_easy SET
+        addition = ?,
+        subtraction = ?,
+        multiplication = ?,
+        division = ?
+        WHERE user_id = ?`,
+            [data.addition, data.subtraction,data.multiplication, data.division, user.id]);
+    }
 }
 module.exports = QuizRepository;

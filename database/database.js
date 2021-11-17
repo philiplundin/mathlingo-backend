@@ -42,7 +42,7 @@ class AppDao {
                          subtraction INTEGER,
                          multiplication INTEGER,
                          division INTEGER,
-                          user_id INTEGER)`, (err) => {
+                          user_id INTEGER FOREIGN KEY)`, (err) => {
                         if (err) {
                             // Table already created
                             console.log('Schema Exists');

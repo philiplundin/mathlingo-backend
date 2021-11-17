@@ -2,6 +2,7 @@ require('dotenv').config();
 const Promise = require('bluebird');
 const QuizRepository = require('../repositories/quiz_repository');
 const AppDao = require('../database/database');
+const jwt = require("jsonwebtoken");
 const daoQuiz = new AppDao(process.env.DB_URL)
 const quizRepo = new QuizRepository(daoQuiz)
 
@@ -10,7 +11,7 @@ async function get(id) {
     return quiz;
 }
 
-async function getAll(){
+async function getAll() {
     return quizRepo.getAll();
 }
 
@@ -19,7 +20,7 @@ async function getResultsEasy(id) {
     return results;
 }
 
-async function getAllResultsEasy(){
+async function getAllResultsEasy() {
     return quizRepo.getAllResultsEasy();
 }
 
@@ -28,7 +29,7 @@ async function getResultsHard(id) {
     return results;
 }
 
-async function getAllResultsHard(){
+async function getAllResultsHard() {
     return quizRepo.getAllResultsHard();
 }
 
@@ -37,15 +38,26 @@ async function getResultsFinal(id) {
     return results;
 }
 
-async function getAllResultsFinal(){
+async function getAllResultsFinal() {
     return quizRepo.getAllResultsFinal();
 }
 
-async function createResultsEasy(user, results_easy) {
-    return quizRepo.createResultsEasy(user, results_easy);
+async function createResultsEasy(data) {
+
+    let user = jwt.verify(data.accessToken, process.env.ACCESS_TOKEN_SECRET);
+
+    let userID = await getResultsEasy(user.id);
+console.log(userID)
+    if (!userID) {
+        return quizRepo.createResultsEasy(data, user);
+    } else {
+        return quizRepo.updateResultsEasy(data, user);
+    }
 }
 
-module.exports = {get, getAll, getResultsEasy, getAllResultsEasy,
+module.exports = {
+    get, getAll, getResultsEasy, getAllResultsEasy,
     getResultsHard, getAllResultsHard,
     getResultsFinal, getAllResultsFinal,
-    createResultsEasy}
+    createResultsEasy
+}

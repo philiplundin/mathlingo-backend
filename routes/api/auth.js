@@ -139,7 +139,7 @@ router.get('/results_final', async (req, res, next) => {
 });
 
 router.post("/results_easy", async (req, res, next) => {
-    await QuizService.createResultsEasy(req.body.data);
+    await QuizService.createResultsEasy(req.body);
     if (!req.body.data) {
         res.status(403).send("Wrong Email or Password")
     }
