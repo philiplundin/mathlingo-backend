@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86735445-6196-419a-bf25-c50d27eb0d55" name="Changes" comment="Quiz statistiks med results_easy with accessToken!">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/quiz_service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/quiz_service.js" afterDir="false" />
-    </list>
+    <list default="true" id="86735445-6196-419a-bf25-c50d27eb0d55" name="Changes" comment="changed endpoint results_easy_token" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -170,7 +166,13 @@
       <option name="project" value="LOCAL" />
       <updated>1637254684211</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL−00012" summary="changed endpoint results_easy_token">
+      <created>1637255985416</created>
+      <option name="number" value="LOCAL−00012" />
+      <option name="presentableId" value="LOCAL−00012" />
+      <updated>1637255985416</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,6 +200,7 @@
     <MESSAGE value="Quiz file updated!" />
     <MESSAGE value="Quiz statistiks med results_easy." />
     <MESSAGE value="Quiz statistiks med results_easy with accessToken!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Quiz statistiks med results_easy with accessToken!" />
+    <MESSAGE value="changed endpoint results_easy_token" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed endpoint results_easy_token" />
   </component>
 </project>
