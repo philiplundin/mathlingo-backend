@@ -109,9 +109,15 @@ router.get('/quiz/:id', async (req, res, next) => {
     res.send(quiz);
 });
 
-router.get('/results_easy/:id', async (req, res, next) => {
+// router.get('/results_easy/:id', async (req, res, next) => {
+//     console.log("GET results_easy request called");
+//     let results_easy = await QuizService.getResultsEasy(req.params.id);
+//     res.send(results_easy);
+// });
+
+router.get('/results_easy/:accessToken', async (req, res, next) => {
     console.log("GET results_easy request called");
-    let results_easy = await QuizService.getResultsEasy(req.params.id);
+    let results_easy = await QuizService.getResultsEasy(req.params.accessToken);
     res.send(results_easy);
 });
 

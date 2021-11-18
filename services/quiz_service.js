@@ -15,8 +15,9 @@ async function getAll() {
     return quizRepo.getAll();
 }
 
-async function getResultsEasy(id) {
-    let results = await quizRepo.getResultEasy(id);
+async function getResultsEasy(accessToken) {
+    let user = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+    let results = await quizRepo.getResultEasy(user.id);
     return results;
 }
 

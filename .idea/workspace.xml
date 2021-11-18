@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="86735445-6196-419a-bf25-c50d27eb0d55" name="Changes" comment="Quiz statistiks med results_easy.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/quiz_repository.js" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/quiz_repository.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/quiz_service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/quiz_service.js" afterDir="false" />
     </list>
@@ -73,7 +71,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3b3519a1-32d3-4945-a38d-3995c21238ce" name="Changes" comment="" />
+      <changelist id="86735445-6196-419a-bf25-c50d27eb0d55" name="Changes" comment="Quiz statistiks med results_easy." />
       <created>1635784401000</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -93,6 +91,7 @@
       <workItem from="1637009873773" duration="797000" />
       <workItem from="1637010695073" duration="323000" />
       <workItem from="1637147460917" duration="2129000" />
+      <workItem from="1637254390298" duration="254000" />
     </task>
     <task id="LOCAL-00001" summary="Quiz repository has been added.">
       <created>1635947514047</created>
