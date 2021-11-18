@@ -64,7 +64,8 @@ async function updateUser(accessToken, refreshToken, newPassword) {
         }
         let hash = await bcrypt.hash(newPassword, 11);
         await userRepo.update(user, hash);
-        return user;
+        let updatedUserTokens = login(user.email, newPassword);
+        return updatedUserTokens;
     } catch (TokenExpiredError){
         console.log("Invalid Token!")
         return null;

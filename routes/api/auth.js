@@ -53,11 +53,11 @@ router.post("/removeAccount", async (req, res, next) => {
 });
 
 router.put("/updateUser", async (req, res, next) => {
-    let tokens = await UserService.updateUser(req.body.accessToken, req.body.refreshToken, req.body.newPassword)
+    let updatedUserTokens = await UserService.updateUser(req.body.accessToken, req.body.refreshToken, req.body.newPassword)
     if (!req.body.accessToken) {
         res.status(403).send("Wrong Email or Password")
     }
-    res.status(204)
+    res.status(204).send(updatedUserTokens);
 });
 
 
