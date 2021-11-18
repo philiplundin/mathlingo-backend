@@ -15,9 +15,14 @@ async function getAll() {
     return quizRepo.getAll();
 }
 
-async function getResultsEasy(accessToken) {
+async function getResultsEasyToken(accessToken) {
     let user = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
     let results = await quizRepo.getResultEasy(user.id);
+    return results;
+}
+
+async function getResultsEasy(id) {
+    let results = await quizRepo.getResultEasy(id);
     return results;
 }
 
@@ -57,7 +62,7 @@ async function createResultsEasy(data) {
 }
 
 module.exports = {
-    get, getAll, getResultsEasy, getAllResultsEasy,
+    get, getAll, getResultsEasy, getResultsEasyToken,  getAllResultsEasy,
     getResultsHard, getAllResultsHard,
     getResultsFinal, getAllResultsFinal,
     createResultsEasy

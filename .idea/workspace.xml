@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86735445-6196-419a-bf25-c50d27eb0d55" name="Changes" comment="Quiz statistiks med results_easy.">
+    <list default="true" id="86735445-6196-419a-bf25-c50d27eb0d55" name="Changes" comment="Quiz statistiks med results_easy with accessToken!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/quiz_service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/quiz_service.js" afterDir="false" />
@@ -91,7 +91,7 @@
       <workItem from="1637009873773" duration="797000" />
       <workItem from="1637010695073" duration="323000" />
       <workItem from="1637147460917" duration="2129000" />
-      <workItem from="1637254390298" duration="254000" />
+      <workItem from="1637254390298" duration="726000" />
     </task>
     <task id="LOCAL-00001" summary="Quiz repository has been added.">
       <created>1635947514047</created>
@@ -163,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637169355258</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Quiz statistiks med results_easy with accessToken!">
+      <created>1637254684211</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1637254684211</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,6 +197,7 @@
     <MESSAGE value="Added swagger documentation." />
     <MESSAGE value="Quiz file updated!" />
     <MESSAGE value="Quiz statistiks med results_easy." />
-    <option name="LAST_COMMIT_MESSAGE" value="Quiz statistiks med results_easy." />
+    <MESSAGE value="Quiz statistiks med results_easy with accessToken!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Quiz statistiks med results_easy with accessToken!" />
   </component>
 </project>
