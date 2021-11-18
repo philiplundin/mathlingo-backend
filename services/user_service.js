@@ -11,7 +11,6 @@ const userRepo = new UserRepository(dao)
 
 async function getUserByEmail(email) {
     let user = await userRepo.search(email);
-    console.log(user)
     return user;
 }
 
@@ -124,4 +123,12 @@ async function logout(accessToken) {
     }
 }
 
-module.exports = {getUserByEmail, addUser, login, newAccessToken, logout, deleteUser, updateUser}
+async function available(email) {
+    let user = await getUserByEmail(email);
+    if(user) {
+        return false;
+    }
+    else return true;
+}
+
+module.exports = {getUserByEmail, addUser, login, newAccessToken, logout, deleteUser, updateUser, available}

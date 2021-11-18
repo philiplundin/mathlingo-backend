@@ -53,7 +53,7 @@ router.post("/removeAccount", async (req, res, next) => {
 });
 
 router.put("/updateUser", async (req, res, next) => {
-    let tokens = await UserService.updateUser(req.body.accessToken, req.body.refreshToken, 'r')
+    let tokens = await UserService.updateUser(req.body.accessToken, req.body.refreshToken, req.body.newPassword)
     if (!req.body.accessToken) {
         res.status(403).send("Wrong Email or Password")
     }
@@ -65,9 +65,11 @@ router.post("/signup", async (req, res, next) => {
     let errors=[];
     if (!req.body.name) {
         errors.push("No Username");
-    } if(!req.body.email) {
+    }
+    if(!req.body.email) {
         errors.push("No Email");
-    } if (!req.body.password) {
+    }
+    if (!req.body.password) {
         errors.push("No Password");
     }
     if (errors.length != 0) {
@@ -84,14 +86,22 @@ router.post("/signup", async (req, res, next) => {
     }
 });
 
+router.post("/available", async (req, res, next) => {
+    if(!req.body.email) {
+        res.status(400).json("No Email");
+    }
+    else {
+        let available = await UserService.available(req.body.email);
+        res.send(available);
+    }
+});
+
 router.get('/quiz', async (req, res, next) => {
     let quiz = await QuizService.getAll();
     res.json({
             quiz
     });
 });
-
-
 
 router.get('/quiz/:id', async (req, res, next) => {
     console.log("GET request called");
