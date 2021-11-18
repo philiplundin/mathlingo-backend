@@ -44,14 +44,14 @@ async function getAllResultsFinal() {
 
 async function createResultsEasy(data) {
 
-    let user = jwt.verify(data.accessToken, process.env.ACCESS_TOKEN_SECRET);
+    let user = jwt.decode(data.accessToken, process.env.ACCESS_TOKEN_SECRET);
 
     let userID = await getResultsEasy(user.id);
-console.log(userID)
+
     if (!userID) {
-        return quizRepo.createResultsEasy(data, user);
+        return await quizRepo.createResultsEasy(data, user);
     } else {
-        return quizRepo.updateResultsEasy(data, user);
+        return await quizRepo.updateResultsEasy(data, user);
     }
 }
 

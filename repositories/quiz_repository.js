@@ -64,14 +64,12 @@ class QuizRepository {
     }
 
    async updateResultsEasy(data, user) {
-        console.log(data);
-        console.log(user);
-        await this.daoQuiz.run(`UPDATE results_easy SET
-        addition = ?,
-        subtraction = ?,
-        multiplication = ?,
-        division = ?
-        WHERE user_id = ?`,
+        return await this.daoQuiz.run(`UPDATE results_easy SET
+            addition = ?,
+            subtraction = ?,
+            multiplication = ?,
+            division = ?
+            WHERE user_id = ?`,
             [data.addition, data.subtraction,data.multiplication, data.division, user.id]);
     }
 }
