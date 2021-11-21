@@ -6,6 +6,8 @@ const QuizService = require('../../services/quiz_service');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
+// ******************************************* User endpoints **************************************************
+
 router.post("/login", async (req, res, next) => {
     let errors = [];
     if (!req.body.email) {
@@ -96,6 +98,12 @@ router.post("/available", async (req, res, next) => {
     }
 });
 
+
+
+
+// ******************************************* Quiz endpoints **************************************************
+
+
 router.get('/quiz', async (req, res, next) => {
     let quiz = await QuizService.getAll();
     res.json({
@@ -109,15 +117,14 @@ router.get('/quiz/:id', async (req, res, next) => {
     res.send(quiz);
 });
 
+
+// ******************************************* Quiz_easy endpoints **************************************************
+
+
+
 router.get('/results_easy/:id', async (req, res, next) => {
     console.log("GET results_easy request called");
     let results_easy = await QuizService.getResultsEasy(req.params.id);
-    res.send(results_easy);
-});
-
-router.get('/results_easy_token/:accessToken', async (req, res, next) => {
-    console.log("GET results_easy request called");
-    let results_easy = await QuizService.getResultsEasyToken(req.params.accessToken);
     res.send(results_easy);
 });
 
@@ -127,6 +134,31 @@ router.get('/results_easy', async (req, res, next) => {
         results_easy
     });
 });
+
+router.get('/results_easy_token/:accessToken', async (req, res, next) => {
+    console.log("GET results_easy request called");
+    let results_easy = await QuizService.getResultsEasyToken(req.params.accessToken);
+    res.send(results_easy);
+});
+
+
+
+router.post("/results_easy", async (req, res, next) => {
+
+    //TODO: ADD MORE CHECKS!
+    if (!req.body) {
+        res.status(400).send("Needs body")
+    }
+    else {
+        let result = await QuizService.createResultsEasy(req.body);
+        res.status(204).send(await result);
+    }
+});
+
+
+
+// ******************************************* Quiz_hard endpoints **************************************************
+
 
 router.get('/results_hard/:id', async (req, res, next) => {
     console.log("GET results_hard request called");
@@ -141,6 +173,32 @@ router.get('/results_hard', async (req, res, next) => {
     });
 });
 
+
+router.get('/results_hard_token/:accessToken', async (req, res, next) => {
+    console.log("GET results_hard request called");
+    let results_hard = await QuizService.getResultsHardToken(req.params.accessToken);
+    res.send(results_hard);
+});
+
+
+
+router.post("/results_hard", async (req, res, next) => {
+
+    //TODO: ADD MORE CHECKS!
+    if (!req.body) {
+        res.status(400).send("Needs body")
+    }
+    else {
+        let result = await QuizService.createResultsHard(req.body);
+        res.status(204).send(await result);
+    }
+});
+
+
+
+// ******************************************* Quiz_final endpoints **************************************************
+
+
 router.get('/results_final/:id', async (req, res, next) => {
     console.log("GET results_final request called");
     let results_final = await QuizService.getResultsFinal(req.params.id);
@@ -154,17 +212,27 @@ router.get('/results_final', async (req, res, next) => {
     });
 });
 
-router.post("/results_easy", async (req, res, next) => {
-    
+router.get('/results_final_token/:accessToken', async (req, res, next) => {
+    console.log("GET results_final request called");
+    let results_final = await QuizService.getResultsFinalToken(req.params.accessToken);
+    res.send(results_final);
+});
+
+
+
+router.post("/results_final", async (req, res, next) => {
+
     //TODO: ADD MORE CHECKS!
     if (!req.body) {
         res.status(400).send("Needs body")
     }
     else {
-        let result = await QuizService.createResultsEasy(req.body);
+        let result = await QuizService.createResultsFinal(req.body);
         res.status(204).send(await result);
     }
 });
+
+
 
 // router.post("/token", async (req, res) => {
 //     if (req.body.token == null) {
