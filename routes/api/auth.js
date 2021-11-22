@@ -206,6 +206,7 @@ router.get('/results_final/:id', async (req, res, next) => {
 });
 
 router.get('/results_final', async (req, res, next) => {
+    console.log("GET results_final request for all called");
     let results_final = await QuizService.getAllResultsFinal();
     res.json({
         results_final
@@ -213,7 +214,7 @@ router.get('/results_final', async (req, res, next) => {
 });
 
 router.get('/results_final_token/:accessToken', async (req, res, next) => {
-    console.log("GET results_final request called");
+    console.log("GET results_final with token request called");
     let results_final = await QuizService.getResultsFinalToken(req.params.accessToken);
     res.send(results_final);
 });
