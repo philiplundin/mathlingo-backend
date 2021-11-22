@@ -68,7 +68,7 @@ class QuizRepository {
 
     async getResultHard(id) {
         let results_hard = await this.daoQuiz.get(
-            `SELECT * FROM results_hard WHERE id = ?`,
+            `SELECT * FROM results_hard WHERE user_id = ?`,
             [id]);
         return results_hard;
     }
@@ -103,7 +103,7 @@ class QuizRepository {
 
     async getResultFinal(id) {
         let results_final = await this.daoQuiz.get(
-            `SELECT * FROM results_final WHERE id = ?`,
+            `SELECT * FROM results_final WHERE user_id = ?`,
             [id]);
         return results_final;
     }
