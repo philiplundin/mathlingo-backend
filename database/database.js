@@ -92,9 +92,10 @@ class AppDao {
                         } else {
                             console.log('New Schema - USER');
                             let insert = 'INSERT INTO user (name, password, email) VALUES (?,?,?)'
-                            this.db.run(insert, ["Adam Adamsson", bcrypt.hashSync('adamadam123', 11), "adam@adamsson.se"])
-                            this.db.run(insert, ["Bertil Bertilsson", bcrypt.hashSync('bertilbertil123', 11), "bertil@bertilsson.se"])
-                            this.db.run(insert, ["David Davidsson", bcrypt.hashSync('daviddavid123', 11), "david@davidsson.se"])
+                            this.db.run(insert, ["Farrukh", bcrypt.hashSync('farrukh', 11), "farrukh@mathlingo.se"])
+                            this.db.run(insert, ["Gustav", bcrypt.hashSync('gustav', 11), "gustav@mathlingo.se"])
+                            this.db.run(insert, ["Milan", bcrypt.hashSync('milan', 11), "milan@mathlingo.se"])
+                            this.db.run(insert, ["Philip", bcrypt.hashSync('philip', 11), "philip@mathlingo.se"])
                         }
                     });
             }
