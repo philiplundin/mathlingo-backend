@@ -3,7 +3,7 @@ const Promise = require('bluebird');
 const bcrypt = require('bcrypt');
 
 class AppDao {
-    constructor(DBSOURCE) {
+        constructor(DBSOURCE) {
         this.db = new sqlite3.Database(DBSOURCE, (err) => {
             if (err) {
                 console.log("Could not connect to database", err);
@@ -22,6 +22,7 @@ class AppDao {
                         console.log('Schema Exists');
                     } else {
                         console.log('New Schema - QUIZ');
+
                         let insert = 'INSERT INTO quiz (category, difficulty, question, correct_answer) VALUES (?,?,?,?)'
                         this.db.run(insert, ["Addition", "medium", "1 + 1", "2"])
                         this.db.run(insert, ["Addition", "medium", "2 + 2", "4"])
